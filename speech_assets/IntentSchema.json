@@ -1,0 +1,64 @@
+{
+  "intents": [
+    {
+      "intent": "GetNewTipIntent"
+    },
+    {
+      "intent":"PlayQuizIntent"
+    },
+    {
+      "intent":"SingleAnswerIntent",
+      "slots": [{
+        "name": "answer",
+        "type": "single_answer"
+        }]
+    },
+    {
+      "intent": "TwoAnswerIntent",
+      "slots": [
+        {
+          "name": "answer_one",
+          "type": "single_answer"
+        },
+        {
+          "name": "answer_two",
+          "type": "single_answer"
+        }
+      ]
+    },
+    {
+      "intent": "FiveAnswerIntent",
+      "slots": [
+        {
+          "name": "answer_one",
+          "type": "single_answer"
+        },
+        {
+          "name": "answer_two",
+          "type": "single_answer"
+        },
+        {
+          "name": "answer_three",
+          "type": "single_answer"
+        },
+        {
+          "name": "answer_four",
+          "type": "single_answer"
+        },
+        {
+          "name": "answer_five",
+          "type": "single_answer"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}

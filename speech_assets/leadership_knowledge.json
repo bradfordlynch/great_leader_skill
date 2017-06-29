@@ -1,0 +1,131 @@
+{
+  "quiz":[
+    {
+      "type": "single_part",
+      "question": "What is leadership?",
+      "answers": [
+        {
+          "value": "getting results in a way that inspires trust"
+        },
+        {
+          "value": "the art of mobilizing others to want to struggle for shared aspirations"
+        },
+        {
+          "value": "a relationship between those who aspire to lead and those who choose to follow"
+        }
+      ]
+    },
+    {
+      "type": "multi_part",
+      "question": "What are the five practices of Exemplary Leadership?",
+      "answers": [
+        {
+          "value": "Model the way",
+          "details": "Leaders Model the Way by clarifying values and setting an example"
+        },
+        {
+          "value": "Inspire a shared vision",
+          "details": ""
+        },
+        {
+          "value": "Challenge the process",
+          "details": ""
+        },
+        {
+          "value": "Enable others to act",
+          "details": ""
+        },
+        {
+          "value": "Encourage the heart",
+          "details": ""
+        }
+      ]
+    },
+    {
+      "type": "multi_part",
+      "question": "What are the two commitments of Model the Way?",
+      "answers": [
+        {
+          "value": "Clarify values",
+          "details": "Clarify values by finding your voice and affirming shared values."
+        },
+        {
+          "value": "Set the example",
+          "details": "Set the example by aligning actions with shared values."
+        }
+      ]
+    },
+    {
+      "type": "multi_part",
+      "question": "What are the two commitments of Inspire a Shared Vision?",
+      "answers": [
+        {
+          "value": "Envision the future",
+          "details": "Envision the future by imagining exciting and enabling possibilities."
+        },
+        {
+          "value": "Enlist others",
+          "details": "Enlist others in a common vision by appealing to their shared aspirations."
+        }
+      ]
+    },
+    {
+      "type": "multi_part",
+      "question": "What are the two commitments of Challenge the Process?",
+      "answers": [
+        {
+          "value": "Search for opportunities",
+          "details": "Search for opportunities by seizing the initiative and by looking outward for innovative ways to improve."
+        },
+        {
+          "value": "Experiment and take risks",
+          "details": "Experiment and take risks by constantly generating small wins and learning from experience."
+        }
+      ]
+    },
+    {
+      "type": "multi_part",
+      "question": "What are the two ways of enabling others to act?",
+      "answers": [
+        {
+          "value": "Foster collaboration",
+          "details": "Foster collaboration by building trust and facilitating relationships."
+        },
+        {
+          "value": "Strengthen others",
+          "details": "Strengthen others by increasing self-determination and developing competence."
+        }
+      ]
+    },
+    {
+      "type": "multi_part",
+      "question": "What are two ways of Encouraging the Heart?",
+      "answers": [
+        {
+          "value": "Recognize contributions",
+          "details": "Recognize contributions by showing appreciation for individual excellence."
+        },
+        {
+          "value": "Celebrate the values and victories",
+          "details": "Celebrate the values and victories by creating a spirit of community."
+        }
+      ]
+    }
+  ],
+  "leadership_tips": [
+    "Expect the best from other people. If you dont your relationship is already potentially broken.",
+    "Only you can choose to extend trust to others or not. It is a choice that you make.",
+    "Management and leadership are related. Leadership is doing the right things. Management is doing things right.",
+    "Vision is a leadership practice.",
+    "The best leaders are Integrated leaders, They lead AND manage simultaneously.",
+    "Leadership is Everyones Business",
+    "Leadership Makes a Difference",
+    "Leadership is Learned",
+    "Leadership is a Relationship",
+    "Leadership Development is Self-Development",
+    "Learning to Lead is an Ongoing Process",
+    "Leadership Requires Deliberate Practice",
+    "Leadership is an Aspiration and a Choice",
+    "You Dont Need a Big Title or Rank to be a Leader"
+  ]
+}

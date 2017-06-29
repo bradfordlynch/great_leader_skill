@@ -1,0 +1,21 @@
+GetNewTipIntent a tip
+GetNewTipIntent tell me a tip
+GetNewTipIntent tell me a leadership tip
+GetNewTipIntent give me a tip
+GetNewTipIntent give me a leadership tip
+GetNewTipIntent give me some leadership information
+GetNewTipIntent tell me something
+
+PlayQuizIntent quiz
+PlayQuizIntent quiz me
+PlayQuizIntent play quiz
+PlayQuizIntent play the quiz
+PlayQuizIntent give me the quiz
+
+SingleAnswerIntent leadership is {answer}
+SingleAnswerIntent {answer}
+
+TwoAnswerIntent {answer_one} and {answer_two}
+
+FiveAnswerIntent {answer_one}, {answer_two}, {answer_three}, {answer_four}, and {answer_five}
+FiveAnswerIntent {answer_one}, {answer_two}, {answer_three}, {answer_four}, and lastly {answer_five}
