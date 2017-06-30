@@ -1,0 +1,8 @@
+{
+    "production": {
+        "app_function": "great_leader.app", 
+        "aws_region": "us-east-1", 
+        "profile_name": "default", 
+        "s3_bucket": "zappa-usm4ioh9c"
+    }
+}

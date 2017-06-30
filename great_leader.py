@@ -1,5 +1,5 @@
 import site
-site.addsitedir('./lib')
+#site.addsitedir('./lib')
 
 import logging
 import os
