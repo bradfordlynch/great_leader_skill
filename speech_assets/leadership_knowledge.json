@@ -5,39 +5,13 @@
       "question": "What is leadership?",
       "answers": [
         {
-          "value": "getting results in a way that inspires trust"
+          "value": "Getting results in a way that inspires trust"
         },
         {
-          "value": "the art of mobilizing others to want to struggle for shared aspirations"
+          "value": "The art of mobilizing others to want to struggle for shared aspirations"
         },
         {
-          "value": "a relationship between those who aspire to lead and those who choose to follow"
-        }
-      ]
-    },
-    {
-      "type": "multi_part",
-      "question": "What are the five practices of Exemplary Leadership?",
-      "answers": [
-        {
-          "value": "Model the way",
-          "details": "Leaders Model the Way by clarifying values and setting an example"
-        },
-        {
-          "value": "Inspire a shared vision",
-          "details": ""
-        },
-        {
-          "value": "Challenge the process",
-          "details": ""
-        },
-        {
-          "value": "Enable others to act",
-          "details": ""
-        },
-        {
-          "value": "Encourage the heart",
-          "details": ""
+          "value": "A relationship between those who aspire to lead and those who choose to follow"
         }
       ]
     },

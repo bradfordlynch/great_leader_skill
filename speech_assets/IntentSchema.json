@@ -27,6 +27,9 @@
       ]
     },
     {
+      "intent": "DoNotKnowIntent"
+    },
+    {
       "intent": "FiveAnswerIntent",
       "slots": [
         {

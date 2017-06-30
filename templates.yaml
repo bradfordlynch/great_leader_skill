@@ -1,8 +1,11 @@
 card_title: Great Leader
 help: You can ask Great Leader to tell you a leadership tip, or, it can quiz your knowledge. You can also say exit. What can I help you with?
 bye: Goodbye
-continue: "Would you like another fact or the quiz?"
+continue_in_quiz: "Do you want to continue playing the quiz or would you like a leadership tip?"
+continue_in_tip: "Do you want another tip or do you want to take the quiz?"
 need_one_more_answer: It looks like you are missing one answer, what do you think it is?
 need_more_answers: It looks like you are missing {{ n_missing }} answers, what do you think they are?
+no_answer: The correct answer is {{ correct_answer }}.
+no_answers: The correct answers are {{ correct_answers }}.
 incorrect_answer: Uh oh! Your answer {{ wrong_answer }} is incorrect. The missing answer is {{ correct_answer }}.
 incorrect_answers: Uh oh! Your answers {{ wrong_answers }} are incorrect. The missing answers are {{ correct_answers }}.

@@ -39,6 +39,17 @@ def concatenate_text_items(items):
 
     return nat_list
 
+def create_card_text_from_question(question):
+    title = question['question']
+    text = ''
+
+    for answer in question['answers']:
+        text += '-'
+        text += answer['value']
+        text += '\n'
+
+    return title, text
+
 
 def init_session(session):
     """
@@ -50,6 +61,7 @@ def init_session(session):
     """
     session.attributes['rem_quiz_ques'] = range(len(leadership_quiz))
     session.attributes['rem_tips'] = range(len(leadership_tips))
+    session.attributes['state'] = {'context':'tip'}
 
 def init_quiz_state(session, i_quiz):
     """
@@ -95,8 +107,7 @@ def get_quiz_ques_from_sess(session):
 
 def prompt_user_for_more_answers(session):
     """
-    Takes the user's response and compares it to the answers for the current
-    quiz question using difflib.
+    Prompts user to supply additional information to answer the question.
 
     Args:
         session (`obj`: Flask-ASK Session): Current Alexa session
@@ -128,30 +139,39 @@ def check_answers(session):
     state = session.attributes['state']
     response = state['responses']
 
-    # Track correct answers and missing answers if applicable
-    all_correct = True
-    graded = {'correct':{}, 'incorrect':[], 'missing':None}
-
     # Get the correct answers to the question
     i_quiz = state['index']
     known_answers = [elem['value'] for elem in leadership_quiz[i_quiz]['answers']]
 
-    # Check each user response, removing any matching response before checking the next one
-    for resp in response:
-        matches = difflib.get_close_matches(resp, known_answers, cutoff=0.8)
-        if len(matches) > 0:
-            # Mark as correct by saving best match
-            graded['correct'][resp] = matches[0]
+    if len(response) > 0:
+        # Track correct answers and missing answers if applicable
+        all_correct = True
+        graded = {'correct':{}, 'incorrect':[], 'missing':None}
 
-            # Remove match from list of valid answers
-            known_answers.remove(matches[0])
-        else:
-            # Mark as incorrect
-            all_correct = False
-            graded['incorrect'].append(resp)
+        # Check each user response, removing any matching response before checking the next one
+        for resp in response:
+            matches = difflib.get_close_matches(resp, known_answers, cutoff=0.8)
+            if len(matches) > 0:
+                # Mark as correct by saving best match
+                graded['correct'][resp] = matches[0]
 
-    if len(known_answers) > 0:
-        graded['missing'] = known_answers
+                # Remove match from list of valid answers
+                known_answers.remove(matches[0])
+            else:
+                # Mark as incorrect
+                all_correct = False
+                graded['incorrect'].append(resp)
+
+        if len(known_answers) > 0:
+            graded['missing'] = known_answers
+    else:
+        # Everything was wrong since there are no responses
+        all_correct = False
+        graded = {
+            'correct': {},
+            'incorrect': [],
+            'missing': known_answers
+        }
 
     return all_correct, graded
 
@@ -168,19 +188,28 @@ def process_answers(session):
     all_correct, graded = check_answers(session)
     if all_correct:
         return "Great job! That is correct."
+    elif len(graded['incorrect']) == 0:
+        # User provided no answers
+        if len(graded['missing']) == 1:
+            speech_output = render_template('no_answer',
+                                            correct_answer=graded['missing'][0])
+        else:
+            correct_answers = concatenate_text_items(graded['missing'])
+            speech_output = render_template('no_answers',
+                                            correct_answers=correct_answers)
     else:
-        if len(graded['incorrect']) == 1:
+        if len(graded['missing']) == 1:
             speech_output = render_template('incorrect_answer',
                                             wrong_answer=graded['incorrect'][0],
                                             correct_answer=graded['missing'][0])
         else:
             wrong_answers = concatenate_text_items(graded['incorrect'])
-            correct_answers = concatenate_text_items(graded['correct'])
+            correct_answers = concatenate_text_items(graded['missing'])
             speech_output = render_template('incorrect_answers',
                                             wrong_answers=wrong_answers,
                                             correct_answers=correct_answers)
 
-        return speech_output
+    return speech_output
 
 def manage_quiz_state(answers):
     """
@@ -202,7 +231,10 @@ def manage_quiz_state(answers):
         # We have the expected number of answers, check whether the supplied
         # answers are correct
         speech_output = process_answers(session)
-        speech_output += " " + render_template('continue')
+        speech_output += " " + render_template('continue_in_quiz')
+        #question = leadership_quiz[state['index']]
+        #title, text = create_card_text_from_question(question)
+
         return question(speech_output).reprompt(speech_output)
     else:
         # Prompt user for additional answers
@@ -224,7 +256,7 @@ def get_new_tip():
     tip = leadership_tips[i_tip]
     fact_text = tip
     card_title = render_template('card_title')
-    res = "Would you like another fact or the quiz?"
+    res = render_template('continue_in_tip')
     return question(fact_text + ". " + res).reprompt(res).simple_card(card_title, fact_text)
 
 @ask.intent('PlayQuizIntent')
@@ -242,10 +274,22 @@ def single_answer(answer):
 def two_answer(answer_one, answer_two):
     return manage_quiz_state([answer_one, answer_two])
 
-@ask.intent("FiveAnswerIntent")
-def five_answer(answer_one, answer_two, answer_three, answer_four, answer_five):
-    answers = [answer_one, answer_two, answer_three, answer_four, answer_five]
-    return manage_quiz_state(answers)
+# @ask.intent("FiveAnswerIntent")
+# def five_answer(answer_one, answer_two, answer_three, answer_four, answer_five):
+#     answers = [answer_one, answer_two, answer_three, answer_four, answer_five]
+#     return manage_quiz_state(answers)
+
+@ask.intent('DoNotKnowIntent')
+def do_not_know():
+    # Get state
+    state = session.attributes['state']
+    if state['context'] == 'quiz':
+        speech_output = process_answers(session)
+        speech_output += " " + render_template('continue_in_quiz')
+    else:
+        speech_output = render_template('help')
+
+    return question(speech_output).reprompt(speech_output)
 
 @ask.intent('AMAZON.HelpIntent')
 def help():
