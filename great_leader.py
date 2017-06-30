@@ -96,6 +96,9 @@ def get_tip_from_sess(session):
     except ValueError:
         session.attributes['rem_tips'] = range(len(leadership_tips))
         return get_tip_from_sess(session)
+    except KeyError:
+        init_session(session)
+        return get_tip_from_sess(session)
 
 def get_quiz_ques_from_sess(session):
     try:
@@ -103,6 +106,9 @@ def get_quiz_ques_from_sess(session):
         return session.attributes['rem_quiz_ques'].pop(i_quiz_ques)
     except ValueError:
         session.attributes['rem_quiz_ques'] = range(len(leadership_quiz))
+        return get_quiz_ques_from_sess(session)
+    except KeyError:
+        init_session(session)
         return get_quiz_ques_from_sess(session)
 
 def prompt_user_for_more_answers(session):
@@ -232,10 +238,10 @@ def manage_quiz_state(answers):
         # answers are correct
         speech_output = process_answers(session)
         speech_output += " " + render_template('continue_in_quiz')
-        #question = leadership_quiz[state['index']]
-        #title, text = create_card_text_from_question(question)
+        question_data = leadership_quiz[state['index']]
+        title, text = create_card_text_from_question(question_data)
 
-        return question(speech_output).reprompt(speech_output)
+        return question(speech_output).reprompt(speech_output).simple_card(title, text)
     else:
         # Prompt user for additional answers
         return prompt_user_for_more_answers(session)
@@ -286,10 +292,14 @@ def do_not_know():
     if state['context'] == 'quiz':
         speech_output = process_answers(session)
         speech_output += " " + render_template('continue_in_quiz')
+        question_data = leadership_quiz[state['index']]
+        title, text = create_card_text_from_question(question_data)
+
+        return question(speech_output).reprompt(speech_output).simple_card(title, text)
     else:
         speech_output = render_template('help')
 
-    return question(speech_output).reprompt(speech_output)
+        return question(speech_output).reprompt(speech_output)
 
 @ask.intent('AMAZON.HelpIntent')
 def help():

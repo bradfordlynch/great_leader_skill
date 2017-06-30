@@ -21,6 +21,3 @@ DoNotKnowIntent I don't know
 DoNotKnowIntent I do not know
 DoNotKnowIntent I don't know the answer
 DoNotKnowIntent I'm not sure
-
-FiveAnswerIntent {answer_one}, {answer_two}, {answer_three}, {answer_four}, and {answer_five}
-FiveAnswerIntent {answer_one}, {answer_two}, {answer_three}, {answer_four}, and lastly {answer_five}
